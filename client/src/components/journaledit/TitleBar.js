@@ -14,7 +14,7 @@ const TitleBar = (props) => {
     >
       <Toolbar>
         <Typography variant="h6" noWrap component="div">
-          {props.entry?.title || "Untitled Entry"}
+          {props.currentEntry?.body?.split("\n")[0] || "Untitled Entry"}
         </Typography>
       </Toolbar>
     </AppBar>

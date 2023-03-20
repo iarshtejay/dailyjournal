@@ -9,10 +9,11 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import DeleteIcon from '@mui/icons-material/Delete';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import AddBoxIcon from '@mui/icons-material/AddBox';
+import DeleteIcon from "@mui/icons-material/Delete";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import { Button } from "@mui/material";
 
 const SideBar = (props) => {
   return (
@@ -29,42 +30,50 @@ const SideBar = (props) => {
       anchor="left"
     >
       <Toolbar>
-        <Typography sx={{fontWeight:"bolder", fontSize:"1 em"}}>{props.journal?.title || "Arsh's Journal"}</Typography>
-        <IconButton edge="end" aria-label="add">
-                  <AddBoxIcon />
+        <Typography variant="h5">
+          {props.journal?.title || "Arsh's Journal"}
+        </Typography>
+        <IconButton aria-label="add" onClick={() => props.createNewEntry()}>
+          <AddBoxIcon />
         </IconButton>
       </Toolbar>
       <Divider />
+
+      <Button
+        aria-label="all-journals"
+        variant="text"
+        onClick={() => console.log("All Journals")}
+      >
+        All Journals
+      </Button>
+
+      <Divider />
       <List>
-        {["All Journals"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
+        {props.entries.map((entry, index) => (
+          <ListItem
+            key={entry.title || index}
+            disablePadding
+            secondaryAction={
+              entry.id === props.currentEntry.id && (
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={(event) => props.deleteEntry(event, entry.id)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              )
+            }
+            onClick={() => props.setCurrentEntryId(entry.id)}
+          >
+            <ListItemButton selected={entry.id === props.currentEntry.id}>
+              <ListItemText
+                primary={entry.body?.split("\n")[0] || "Untitled Note"}
+                secondary={entry.dateModified || new Date().toISOString()}
+              />
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
-      <Divider />
-      <List>
-        {props.entries ||
-          [
-            { title: "Entry 1" },
-            { title: "Entry 2" },
-            { title: "Entry 3" },
-          ].map((entry, index) => (
-            <ListItem key={entry.title || index} disablePadding secondaryAction={
-                <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-              }>
-              <ListItemButton>
-                <ListItemText primary={entry.title || index} secondary={entry.dateModified || (new Date()).toISOString()}/>
-              </ListItemButton>
-            </ListItem>
-          ))}
       </List>
     </Drawer>
   );

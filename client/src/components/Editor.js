@@ -1,5 +1,15 @@
 import Textarea from "@mui/joy/Textarea";
 
-export default function Editor() {
-  return <Textarea color="primary" placeholder="Type anything…" minRows={10} />;
-}
+const Editor = (props) => {
+  return (
+    <Textarea
+      color="primary"
+      placeholder="Type anything…"
+      minRows={10}
+      onChange={(event) => props.updateEntry(event.target.value)}
+      value={props.currentEntry?.body || ""}
+    />
+  );
+};
+
+export default Editor;
