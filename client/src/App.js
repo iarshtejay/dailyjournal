@@ -1,7 +1,10 @@
+import Editor from "./components/Editor";
+import JournalEdit from "./views/JournalEdit";
+
 function App() {
   return (
     <div>
-      <h1>Hello World!</h1>
+      <JournalEdit />
     </div>
   );
 }
