@@ -5,7 +5,7 @@ import JournalEdit from "./views/JournalEdit";
 function App() {
   return (
     <div>
-      < AllJournals />
+      <AllJournals />
     </div>
   );
 }

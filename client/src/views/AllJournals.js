@@ -8,9 +8,8 @@ import WelcomeBar from "../components/alljournals/WelcomeBar";
 import AnimatedWelcomeMessage from "../components/alljournals/AnimatedWelcomeMessage";
 import NewJournalDialog from "../components/alljournals/NewJournalDialog";
 import { Typography } from "@mui/material";
-import background from '../bg.jpg';
+import background from "../bg.jpg";
 import { maxWidth } from "@mui/system";
-
 
 const AllJournals = (props) => {
   /* Lazy loading of a state:
@@ -97,11 +96,20 @@ const AllJournals = (props) => {
       </Box>
     </Box>
   ) : (
-    <Box display={"flex"} flexDirection={"column"} justifyContent="center" alignItems={"center"} sx={{backgroundImage: `url(${background})`, objectFit:"contain"}} height="100vh">
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      justifyContent="center"
+      alignItems={"center"}
+      sx={{ backgroundImage: `url(${background})`, objectFit: "contain" }}
+      height="100vh"
+    >
       <Typography variant="h1">📝</Typography>
-      <Typography variant="h1" sx={{fontWeight:"bold"}}>Journally</Typography>
+      <Typography variant="h1" sx={{ fontWeight: "bold" }}>
+        Journally
+      </Typography>
       <AnimatedWelcomeMessage />
-      <NewJournalDialog createNewJournal={createNewJournal}/>
+      <NewJournalDialog createNewJournal={createNewJournal} />
     </Box>
   );
 };

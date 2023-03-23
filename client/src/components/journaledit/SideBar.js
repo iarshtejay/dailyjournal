@@ -67,7 +67,9 @@ const SideBar = (props) => {
             <ListItemButton selected={entry.id === props.currentEntry.id}>
               <ListItemText
                 primary={entry.body?.split("\n")[0] || "Untitled Entry"}
-                secondary={moment(props.journal?.dateModified || moment.now()).fromNow()}
+                secondary={moment(
+                  props.journal?.dateModified || moment.now()
+                ).fromNow()}
               />
             </ListItemButton>
           </ListItem>

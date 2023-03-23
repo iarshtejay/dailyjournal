@@ -4,7 +4,12 @@ import NewJournalDialog from "./NewJournalDialog";
 
 const WelcomeBar = (props) => {
   return (
-    <Box display={"flex"} flexDirection={"row"} sx={{marginBottom: "2em"}} width="inherit">
+    <Box
+      display={"flex"}
+      flexDirection={"row"}
+      sx={{ marginBottom: "2em" }}
+      width="inherit"
+    >
       <Paper elevation={0} width="50%">
         <Typography>
           {
@@ -12,10 +17,7 @@ const WelcomeBar = (props) => {
           }
         </Typography>
       </Paper>
-      {/* <Button variant="contained" width="50%" endIcon={<AddBoxIcon />} onClick={()=>props.createNewJournal()}>
-          Add New
-      </Button> */}
-      <NewJournalDialog createNewJournal={props.createNewJournal}/>
+      <NewJournalDialog createNewJournal={props.createNewJournal} />
     </Box>
   );
 };
