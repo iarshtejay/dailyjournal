@@ -40,7 +40,7 @@ const SideBar = (props) => {
       <Button
         aria-label="all-journals"
         variant="text"
-        onClick={() => console.log("All Journals")}
+        href="/"
       >
         All Journals
       </Button>

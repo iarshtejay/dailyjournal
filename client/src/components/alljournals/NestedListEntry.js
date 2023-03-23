@@ -940,7 +940,7 @@ const NestedListEntry = (props) => {
           </IconButton>
         }
       >
-        <ListItemButton>
+        <ListItemButton href={`/journals/${props.journal?.id || 123}`}>
           <ListItemAvatar>
             <Avatar>
               {props.journal?.icon ||
