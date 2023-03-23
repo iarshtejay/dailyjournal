@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { Button } from "@mui/material";
+import moment from "moment";
 
 const SideBar = (props) => {
   return (
@@ -66,7 +67,7 @@ const SideBar = (props) => {
             <ListItemButton selected={entry.id === props.currentEntry.id}>
               <ListItemText
                 primary={entry.body?.split("\n")[0] || "Untitled Entry"}
-                secondary={entry.dateModified || new Date().toISOString()}
+                secondary={moment(props.journal?.dateModified || moment.now()).fromNow()}
               />
             </ListItemButton>
           </ListItem>
