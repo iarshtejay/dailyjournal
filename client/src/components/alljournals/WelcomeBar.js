@@ -1,6 +1,6 @@
 import { Button, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import AddBoxIcon from '@mui/icons-material/AddBox';
+import NewJournalDialog from "./NewJournalDialog";
 
 const WelcomeBar = (props) => {
   return (
@@ -12,9 +12,10 @@ const WelcomeBar = (props) => {
           }
         </Typography>
       </Paper>
-      <Button variant="contained" width="50%" endIcon={<AddBoxIcon />} onClick={()=>props.createNewJournal()}>
+      {/* <Button variant="contained" width="50%" endIcon={<AddBoxIcon />} onClick={()=>props.createNewJournal()}>
           Add New
-      </Button>
+      </Button> */}
+      <NewJournalDialog createNewJournal={props.createNewJournal}/>
     </Box>
   );
 };

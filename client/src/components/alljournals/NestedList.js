@@ -8,11 +8,12 @@ export default function NestedList(props) {
     setOpen((prevState) => !prevState);
   };
 
-  return (
+  return props.journals && props.journals.length > 0 ? (
     <Paper elevation={3} width="50%">
       <List sx={{ width: "inherit", bgcolor: "background.paper" }}>
-        {props.journals?.map((journal) => (
+        {props.journals?.map((journal, index) => (
           <NestedListEntry
+            key={journal.id || ("journal-"+index)}
             journal={journal}
             toggleJournalEntryList={toggleJournalEntryList}
             deleteJournal={props.deleteJournal}
@@ -20,5 +21,7 @@ export default function NestedList(props) {
         ))}
       </List>
     </Paper>
+  ) : (
+    <></>
   );
 }

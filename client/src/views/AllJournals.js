@@ -26,11 +26,11 @@ const AllJournals = (props) => {
     localStorage.setItem("journals", JSON.stringify(journals));
   }, [journals]);
 
-  const createNewJournal = () => {
+  const createNewJournal = (journalTitle, journalIcon) => {
     const newJournal = {
       id: nanoid(),
-      title: "",
-      icon: "✍🏽",
+      title: journalTitle || "",
+      icon: journalIcon?.emoji || "✍🏽",
       dateModified: new Date().toISOString(),
       dateCreated: new Date().toISOString(),
     };

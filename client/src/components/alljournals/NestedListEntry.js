@@ -10,6 +10,7 @@ import { IconButton } from "@mui/material";
 import { React, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Divider from "@mui/material/Divider";
+import moment from "moment";
 
 const NestedListEntry = (props) => {
   let allEmojis = [
@@ -948,7 +949,7 @@ const NestedListEntry = (props) => {
           </ListItemAvatar>
           <ListItemText
             primary={props.journal?.title || "Untitled Journal"}
-            secondary={props.journal?.dateModified || "Jan 9, 2014"}
+            secondary={moment(props.journal?.dateModified || moment.now()).fromNow()}
           />
         </ListItemButton>
         <IconButton
