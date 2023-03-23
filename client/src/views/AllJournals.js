@@ -5,8 +5,12 @@ import TitleBar from "../components/alljournals/TitleBar";
 import { nanoid } from "nanoid";
 import NestedList from "../components/alljournals/NestedList";
 import WelcomeBar from "../components/alljournals/WelcomeBar";
+import AnimatedWelcomeMessage from "../components/alljournals/AnimatedWelcomeMessage";
+import NewJournalDialog from "../components/alljournals/NewJournalDialog";
+import { Typography } from "@mui/material";
+import background from '../bg.jpg';
+import { maxWidth } from "@mui/system";
 
-const drawerWidth = 0;
 
 const AllJournals = (props) => {
   /* Lazy loading of a state:
@@ -15,8 +19,7 @@ const AllJournals = (props) => {
    * */
   const [user, setUser] = React.useState("John Doe!");
   const [journals, setJournals] = React.useState(
-    () =>
-      JSON.parse(localStorage.getItem("journals")) || []
+    () => JSON.parse(localStorage.getItem("journals")) || []
   );
   const [currentJournalId, setCurrentJournalId] = React.useState(
     (journals[0] && journals[0].id) || ""
@@ -79,8 +82,8 @@ const AllJournals = (props) => {
     });
   };
 
-  return (
-    <>
+  return journals && journals.length > 0 ? (
+    <Box>
       <TitleBar />
       <Box flexDirection={"column"} sx={{ display: "flex", marginTop: "4em" }}>
         <CssBaseline />
@@ -89,13 +92,17 @@ const AllJournals = (props) => {
           sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
         >
           <WelcomeBar createNewJournal={createNewJournal} />
-          <NestedList
-            journals={journals}
-            deleteJournal={deleteJournal}
-          />
+          <NestedList journals={journals} deleteJournal={deleteJournal} />
         </Box>
       </Box>
-    </>
+    </Box>
+  ) : (
+    <Box display={"flex"} flexDirection={"column"} justifyContent="center" alignItems={"center"} sx={{backgroundImage: `url(${background})`, objectFit:"contain"}} height="100vh">
+      <Typography variant="h1">📝</Typography>
+      <Typography variant="h1" sx={{fontWeight:"bold"}}>Journally</Typography>
+      <AnimatedWelcomeMessage />
+      <NewJournalDialog createNewJournal={createNewJournal}/>
+    </Box>
   );
 };
 
