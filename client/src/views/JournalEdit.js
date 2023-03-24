@@ -11,6 +11,7 @@ import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import PromptGenerator from "../components/journaledit/PromptGenerator";
 
 const drawerWidth = 250;
 
@@ -107,6 +108,7 @@ const JournalEdit = () => {
         sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
       >
         <Toolbar />
+        <PromptGenerator />
         <Editor updateEntry={updateEntry} currentEntry={findCurrentEntry()} />
       </Box>
     </Box>
