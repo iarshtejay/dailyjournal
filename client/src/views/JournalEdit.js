@@ -18,7 +18,7 @@ const drawerWidth = 250;
 const JournalEdit = () => {
   const { journalId } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const activeEntry = searchParams.get("activeEntry")
+  const activeEntry = searchParams.get("activeEntry");
   /* Lazy loading of a state:
    * Pass a function and wrap the expensive code inside a function during state initialization
    * This will ensure that the code gets executed only once even when React re-renders
@@ -79,7 +79,6 @@ const JournalEdit = () => {
   };
 
   const deleteEntry = (event, entryId) => {
-    console.log(event);
     event.stopPropagation();
     setEntries((oldEntries) => {
       const afterDeletion = oldEntries.filter((entry) => entry.id !== entryId);

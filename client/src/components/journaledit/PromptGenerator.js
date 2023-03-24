@@ -1,5 +1,4 @@
-import { Button, Snackbar, Typography } from "@mui/material";
-import { Configuration, OpenAIApi } from "openai";
+import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { Alert } from "@mui/material";
