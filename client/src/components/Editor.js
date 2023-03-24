@@ -8,6 +8,7 @@ const Editor = (props) => {
       minRows={10}
       onChange={(event) => props.updateEntry(event.target.value)}
       value={props.currentEntry?.body || ""}
+      autoFocus={true}
     />
   );
 };

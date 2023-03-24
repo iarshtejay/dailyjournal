@@ -27,24 +27,19 @@ const SideBar = (props) => {
       variant="permanent"
       anchor="left"
     >
-      <Toolbar>
+      <Toolbar sx={{ justifyContent: "space-between", paddingRight: "0" }}>
         <Typography variant="h5">
-          {props.journal?.title || "Arsh's Journal"}
+          {(props.journal?.title || "Arsh's Journal") +
+            (props.journal?.icon || "✍🏽")}
         </Typography>
         <IconButton aria-label="add" onClick={() => props.createNewEntry()}>
           <AddBoxIcon />
         </IconButton>
       </Toolbar>
       <Divider />
-
-      <Button
-        aria-label="all-journals"
-        variant="text"
-        href="/"
-      >
+      <Button aria-label="all-journals" variant="text" href="/">
         All Journals
       </Button>
-
       <Divider />
       <List>
         {props.entries.map((entry, index) => (
@@ -68,7 +63,7 @@ const SideBar = (props) => {
               <ListItemText
                 primary={entry.body?.split("\n")[0] || "Untitled Entry"}
                 secondary={moment(
-                  props.journal?.dateModified || moment.now()
+                  entry?.dateModified || moment.now()
                 ).fromNow()}
               />
             </ListItemButton>

@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     element: <AllJournals />,
   },
   {
-    path: "/journals/*",
+    path: "/journals/:journalId",
     element: <JournalEdit />,
   },
 ]);

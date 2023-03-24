@@ -6,24 +6,35 @@ import Editor from "../components/Editor";
 import TitleBar from "../components/journaledit/TitleBar";
 import SideBar from "../components/journaledit/SideBar";
 import { nanoid } from "nanoid";
+import { useParams } from "react-router-dom";
+import { Button } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 const drawerWidth = 250;
 
 const JournalEdit = () => {
+  const { journalId } = useParams();
   /* Lazy loading of a state:
    * Pass a function and wrap the expensive code inside a function during state initialization
    * This will ensure that the code gets executed only once even when React re-renders
    * */
-  const [journal, setJournal] = React.useState({ title: "My Journal" });
+  const [journal, setJournal] = React.useState(
+    () =>
+      JSON.parse(localStorage.getItem("journals"))?.find(
+        (journal_) => journal_.id === journalId
+      ) || { title: "My Journal" }
+  );
   const [entries, setEntries] = React.useState(
-    () => JSON.parse(localStorage.getItem("entries")) || []
+    () => JSON.parse(localStorage.getItem(journalId)) || []
   );
   const [currentEntryId, setCurrentEntryId] = React.useState(
     (entries[0] && entries[0].id) || ""
   );
 
   React.useEffect(() => {
-    localStorage.setItem("entries", JSON.stringify(entries));
+    localStorage.setItem(journalId, JSON.stringify(entries));
   }, [entries]);
 
   const createNewEntry = () => {
@@ -76,7 +87,7 @@ const JournalEdit = () => {
     });
   };
 
-  return (
+  return entries && entries.length > 0 ? (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <TitleBar drawerWidth={drawerWidth} currentEntry={findCurrentEntry()} />
@@ -95,6 +106,40 @@ const JournalEdit = () => {
       >
         <Toolbar />
         <Editor updateEntry={updateEntry} currentEntry={findCurrentEntry()} />
+      </Box>
+    </Box>
+  ) : (
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      justifyContent="center"
+      alignItems={"center"}
+      height="100vh"
+    >
+      <Typography variant="h1">{journal?.icon || "✍🏽"}</Typography>
+      <Typography variant="h2" sx={{ fontWeight: "bold" }}>
+        {journal?.title || "Untitled Journal"}
+      </Typography>
+      <Typography variant="h5">
+        {"You have no entries in this journal. Start by creating a new entry!"}
+      </Typography>
+      <Box display={"flex"} justifyContent={"space-between"}>
+        <Button
+          variant="contained"
+          onClick={createNewEntry}
+          endIcon={<AddBoxIcon />}
+          sx={{ margin: "1em" }}
+        >
+          New Entry
+        </Button>
+        <Button
+          variant="contained"
+          href="/"
+          endIcon={<ArrowBackIosIcon />}
+          sx={{ margin: "1em" }}
+        >
+          All Journals
+        </Button>
       </Box>
     </Box>
   );
