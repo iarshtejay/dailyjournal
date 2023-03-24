@@ -12,6 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { Button } from "@mui/material";
 import moment from "moment";
+import SortEntries from "./SortEntries";
 
 const SideBar = (props) => {
   return (
@@ -29,7 +30,7 @@ const SideBar = (props) => {
     >
       <Toolbar sx={{ justifyContent: "space-between", paddingRight: "0" }}>
         <Typography variant="h5">
-          {(props.journal?.title || "Arsh's Journal") +
+          {(props.journal?.title || "Untitled Journal") +
             (props.journal?.icon || "✍🏽")}
         </Typography>
         <IconButton aria-label="add" onClick={() => props.createNewEntry()}>
@@ -40,6 +41,7 @@ const SideBar = (props) => {
       <Button aria-label="all-journals" variant="text" href="/">
         All Journals
       </Button>
+      < SortEntries entries={props.entries} setEntries={props.setEntries} />
       <Divider />
       <List>
         {props.entries.map((entry, index) => (

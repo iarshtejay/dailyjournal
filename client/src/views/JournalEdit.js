@@ -102,6 +102,7 @@ const JournalEdit = () => {
         deleteEntry={deleteEntry}
         createNewEntry={createNewEntry}
         setCurrentEntryId={setCurrentEntryId}
+        setEntries={setEntries}
       />
       <Box
         component="main"
