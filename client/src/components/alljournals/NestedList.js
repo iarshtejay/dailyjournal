@@ -13,7 +13,7 @@ export default function NestedList(props) {
       <List sx={{ width: "inherit", bgcolor: "background.paper" }}>
         {props.journals?.map((journal, index) => (
           <NestedListEntry
-            key={journal.id || ("journal-"+index)}
+            key={journal.id || "journal-" + index}
             journal={journal}
             toggleJournalEntryList={toggleJournalEntryList}
             deleteJournal={props.deleteJournal}

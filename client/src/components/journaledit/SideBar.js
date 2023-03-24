@@ -59,7 +59,10 @@ const SideBar = (props) => {
             }
             onClick={() => props.setCurrentEntryId(entry.id)}
           >
-            <ListItemButton selected={entry.id === props.currentEntry.id}>
+            <ListItemButton
+              selected={entry.id === props.currentEntry.id}
+              href={`${props.journal?.id}?activeEntry=${entry.id}`}
+            >
               <ListItemText
                 primary={entry.body?.split("\n")[0] || "Untitled Entry"}
                 secondary={moment(

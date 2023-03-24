@@ -926,6 +926,9 @@ const NestedListEntry = (props) => {
   ];
 
   const [open, setOpen] = useState(false);
+  const [entries, setEntries] = useState(
+    () => JSON.parse(localStorage.getItem(props.journal?.id)) || []
+  );
 
   return (
     <>
@@ -949,33 +952,43 @@ const NestedListEntry = (props) => {
           </ListItemAvatar>
           <ListItemText
             primary={props.journal?.title || "Untitled Journal"}
-            secondary={moment(props.journal?.dateModified || moment.now()).fromNow()}
+            secondary={moment(
+              props.journal?.dateModified || moment.now()
+            ).fromNow()}
           />
         </ListItemButton>
         <IconButton
           edge="end"
           aria-label="delete"
-          onClick={(event) => props.deleteJournal(event, props.journal?.id || "")}
+          onClick={(event) =>
+            props.deleteJournal(event, props.journal?.id || "")
+          }
         >
           <DeleteIcon />
         </IconButton>
         <Divider />
       </ListItem>
       {/* TODO: List journal entries in a particular journal */}
-      {/* {open && (
+      {open && (
         <List>
-          {props.journal?.entries?.map((entry) => {
+          {entries.map((entry) => {
             return (
-              <ListItemButton sx={{ width: "100%" }} selected>
+              <ListItemButton
+                sx={{ width: "100%" }}
+                href={`journals/${props.journal?.id}?activeEntry=${entry.id}`}
+                key={entry.id}
+              >
                 <ListItemText
-                  primary={entry.title || "Entry 1"}
-                  secondary={entry.dateModified || "June 26, 2022"}
+                  primary={entry.body?.split("\n")[0] || "Untitled Entry"}
+                  secondary={moment(
+                    entry?.dateModified || moment.now()
+                  ).fromNow()}
                 />
               </ListItemButton>
             );
           })}
         </List>
-      )} */}
+      )}
     </>
   );
 };
