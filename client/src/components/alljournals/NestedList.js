@@ -9,7 +9,7 @@ export default function NestedList(props) {
   };
 
   return props.journals && props.journals.length > 0 ? (
-    <Paper elevation={3} width="50%">
+    <Paper elevation={3}>
       <List sx={{ width: "inherit", bgcolor: "background.paper" }}>
         {props.journals?.map((journal, index) => (
           <NestedListEntry
