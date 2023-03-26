@@ -8,10 +8,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import EmojiPicker from 'emoji-picker-react';
-import { Typography } from '@mui/material';
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { IconButton } from "@mui/material";
 
 const NewJournalDialog = (props) => {
   const [open, setOpen] = React.useState(false);

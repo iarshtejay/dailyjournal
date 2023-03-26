@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import TitleBar from "../components/alljournals/TitleBar";
@@ -9,14 +9,13 @@ import AnimatedWelcomeMessage from "../components/alljournals/AnimatedWelcomeMes
 import NewJournalDialog from "../components/alljournals/NewJournalDialog";
 import { Typography } from "@mui/material";
 import background from "../bg.jpg";
-import { maxWidth } from "@mui/system";
 
-const AllJournals = (props) => {
+const AllJournals = () => {
   /* Lazy loading of a state:
    * Pass a function and wrap the expensive code inside a function during state initialization
    * This will ensure that the code gets executed only once even when React re-renders
    * */
-  const [user, setUser] = React.useState("John Doe!");
+
   const [journals, setJournals] = React.useState(
     () => JSON.parse(localStorage.getItem("journals")) || []
   );
@@ -38,33 +37,6 @@ const AllJournals = (props) => {
     };
     setJournals((prevJournals) => [newJournal, ...prevJournals]);
     setCurrentJournalId(newJournal.id);
-  };
-
-  const updateJournal = (text) => {
-    setJournals((oldJournals) => {
-      const newJournals = [];
-
-      oldJournals.map((oldJournal) => {
-        if (oldJournal.id === currentJournalId) {
-          newJournals.unshift({
-            ...oldJournal,
-            body: text,
-            dateModified: new Date().toISOString(),
-          });
-        } else {
-          newJournals.push(oldJournal);
-        }
-      });
-      return newJournals;
-    });
-  };
-
-  const findCurrentJournal = () => {
-    return (
-      journals.find((journal) => {
-        return journal.id === currentJournalId;
-      }) || journals[0]
-    );
   };
 
   const deleteJournal = (event, journalId) => {

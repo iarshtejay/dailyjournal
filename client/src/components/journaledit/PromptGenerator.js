@@ -7,6 +7,7 @@ import prompts from "../../data/prompts.json";
 const PromptGenerator = () => {
   const [prompt, setPrompt] = React.useState("What's on your mind?");
   const [showPromptTip, setShowPromptTip] = React.useState(true);
+  
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setShowPromptTip(false);

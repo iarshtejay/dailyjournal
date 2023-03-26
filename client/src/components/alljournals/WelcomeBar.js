@@ -1,4 +1,4 @@
-import { Button, Paper, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import NewJournalDialog from "./NewJournalDialog";
 

@@ -1,11 +1,9 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import List from "@mui/material/ListItem";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import { ListItemButton, Paper } from "@mui/material";
+import { ListItemButton } from "@mui/material";
 import { IconButton } from "@mui/material";
 import { React, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -15,7 +13,7 @@ import Box from "@mui/material/Box";
 
 const NestedListEntry = (props) => {
   const [open, setOpen] = useState(false);
-  const [entries, setEntries] = useState(
+  const [entries] = useState(
     () => JSON.parse(localStorage.getItem(props.journal?.id)) || []
   );
 

@@ -2,8 +2,7 @@ import React from "react";
 import List from "@mui/material/List";
 import { Paper } from "@mui/material";
 import NestedListEntry from "./NestedListEntry";
-
-export default function NestedList(props) {
+const NestedList = (props) => {
   const toggleJournalEntryList = (event, setOpen) => {
     setOpen((prevState) => !prevState);
   };
@@ -25,3 +24,5 @@ export default function NestedList(props) {
     <></>
   );
 }
+
+export default NestedList

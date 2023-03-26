@@ -41,7 +41,7 @@ const SideBar = (props) => {
       <Button aria-label="all-journals" variant="text" href="/">
         All Journals
       </Button>
-      < SortEntries setEntries={props.setEntries} />
+      <SortEntries setEntries={props.setEntries} />
       <Divider />
       <List>
         {props.entries.map((entry, index) => (

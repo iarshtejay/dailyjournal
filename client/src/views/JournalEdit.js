@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
@@ -17,13 +17,13 @@ const drawerWidth = 250;
 
 const JournalEdit = () => {
   const { journalId } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const activeEntry = searchParams.get("activeEntry");
   /* Lazy loading of a state:
    * Pass a function and wrap the expensive code inside a function during state initialization
    * This will ensure that the code gets executed only once even when React re-renders
    * */
-  const [journal, setJournal] = React.useState(
+  const [journal] = React.useState(
     () =>
       JSON.parse(localStorage.getItem("journals"))?.find(
         (journal_) => journal_.id === journalId
@@ -36,9 +36,12 @@ const JournalEdit = () => {
     activeEntry || (entries[0] && entries[0].id) || ""
   );
 
-  React.useEffect(() => {
-    localStorage.setItem(journalId, JSON.stringify(entries));
-  }, [entries]);
+  React.useEffect(
+    (journalId) => {
+      localStorage.setItem(journalId, JSON.stringify(entries));
+    },
+    [entries]
+  );
 
   const createNewEntry = () => {
     const newEntry = {
@@ -65,6 +68,7 @@ const JournalEdit = () => {
         } else {
           newEntries.push(oldEntry);
         }
+        return oldEntry;
       });
       return newEntries;
     });
