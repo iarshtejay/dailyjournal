@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -13,8 +13,13 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import { Button } from "@mui/material";
 import moment from "moment";
 import SortEntries from "./SortEntries";
+import SearchField from "./SearchField";
+import Box from "@mui/material/Box";
 
 const SideBar = (props) => {
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchResults, setSearchResults] = React.useState(() => props.entries);
+
   return (
     <Drawer
       sx={{
@@ -41,10 +46,19 @@ const SideBar = (props) => {
       <Button aria-label="all-journals" variant="text" href="/">
         All Journals
       </Button>
-      <SortEntries setEntries={props.setEntries} />
+      <Box display={"flex"} flexDirection={"row"}>
+        <SearchField
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          entries={props.entries}
+          setSearchResults={setSearchResults}
+        />
+        <SortEntries setEntries={props.setEntries} />
+      </Box>
+
       <Divider />
       <List>
-        {props.entries.map((entry, index) => (
+        {searchResults.map((entry, index) => (
           <ListItem
             key={entry.title || index}
             disablePadding

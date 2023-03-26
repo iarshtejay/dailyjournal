@@ -37,7 +37,7 @@ const JournalEdit = () => {
   );
 
   React.useEffect(
-    (journalId) => {
+    () => {
       localStorage.setItem(journalId, JSON.stringify(entries));
     },
     [entries]
