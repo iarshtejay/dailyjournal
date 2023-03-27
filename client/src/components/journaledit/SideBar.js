@@ -48,7 +48,7 @@ const SideBar = (props) => {
       </Button>
       <Divider />
       <Box display={"flex"} flexDirection={"row"} alignItems={"flex-end"}>
-        <SortEntries setEntries={props.setEntries} />
+        <SortEntries setEntries={setSearchResults} />
         <SearchField
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
