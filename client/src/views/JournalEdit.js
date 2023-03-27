@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
-import Editor from "../components/Editor";
+import Editor from "../components/journaledit/Editor";
 import TitleBar from "../components/journaledit/TitleBar";
 import SideBar from "../components/journaledit/SideBar";
 import { nanoid } from "nanoid";
