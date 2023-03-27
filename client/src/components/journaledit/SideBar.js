@@ -43,7 +43,7 @@ const SideBar = (props) => {
         </IconButton>
       </Toolbar>
       <Divider />
-      <Button aria-label="all-journals" variant="text" href="/">
+      <Button aria-label="all-journals" variant="text" href="/" color="secondary">
         All Journals
       </Button>
       <Divider />

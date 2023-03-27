@@ -145,6 +145,7 @@ const JournalEdit = () => {
           href="/"
           endIcon={<ArrowBackIosIcon />}
           sx={{ margin: "1em" }}
+          color="secondary"
         >
           All Journals
         </Button>
