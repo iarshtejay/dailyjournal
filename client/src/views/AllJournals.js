@@ -40,8 +40,8 @@ const AllJournals = () => {
   };
 
   const deleteJournal = (event, journalId) => {
-    console.log(event);
     event.stopPropagation();
+    event.preventDefault();
     setJournals((oldJournals) => {
       const afterDeletion = oldJournals.filter(
         (journal) => journal.id !== journalId

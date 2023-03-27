@@ -4,6 +4,7 @@ import { Paper } from "@mui/material";
 import NestedListEntry from "./NestedListEntry";
 const NestedList = (props) => {
   const toggleJournalEntryList = (event, setOpen) => {
+    event.preventDefault()
     setOpen((prevState) => !prevState);
   };
 

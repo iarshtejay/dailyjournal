@@ -19,26 +19,14 @@ const NestedListEntry = (props) => {
 
   return (
     <>
-      <ListItem
-        secondaryAction={
-          <IconButton
-            edge="end"
-            aria-label="expand"
-            onClick={(event) => props.toggleJournalEntryList(event, setOpen)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        }
-      >
-        <ListItemButton href={`/journals/${props.journal?.id || 123}`}>
-          <ListItemAvatar>{props.journal?.icon || "✍🏽"}</ListItemAvatar>
-          <ListItemText
-            primary={props.journal?.title || "Untitled Journal"}
-            secondary={moment(
-              props.journal?.dateModified || moment.now()
-            ).fromNow()}
-          />
-        </ListItemButton>
+      <ListItemButton href={`/journals/${props.journal?.id || 123}`}>
+        <ListItemAvatar>{props.journal?.icon || "✍🏽"}</ListItemAvatar>
+        <ListItemText
+          primary={props.journal?.title || "Untitled Journal"}
+          secondary={moment(
+            props.journal?.dateModified || moment.now()
+          ).fromNow()}
+        />
         <IconButton
           edge="end"
           aria-label="delete"
@@ -48,9 +36,15 @@ const NestedListEntry = (props) => {
         >
           <DeleteIcon />
         </IconButton>
-      </ListItem>
+        <IconButton
+          edge="end"
+          aria-label="expand"
+          onClick={(event) => props.toggleJournalEntryList(event, setOpen)}
+        >
+          {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        </IconButton>
+      </ListItemButton>
       <Divider />
-      {/* TODO: List journal entries in a particular journal */}
       {open && (
         <Box display={"flex"} flexDirection={"column"}>
           {entries.map((entry) => {
@@ -59,6 +53,7 @@ const NestedListEntry = (props) => {
                 <ListItemButton
                   href={`journals/${props.journal?.id}?activeEntry=${entry.id}`}
                   key={entry.id}
+                  dense
                 >
                   <ListItemText
                     sx={{ marginLeft: "5em" }}
