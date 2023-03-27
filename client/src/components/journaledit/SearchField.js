@@ -5,38 +5,27 @@ import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 
 const SearchField = (props) => {
-  const [showSearchField, setShowSearchField] = React.useState(false);
-  const toggleShowSearchField = () => {
-    setShowSearchField((prevState) => !prevState);
-  };
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const { entries, setSearchResults } = props;
 
-  const handleSearchInput = (event) => {
-    props.setSearchResults(() => {
-      if (event.target.value === "") return props.entries;
+  React.useEffect(() => {
+    setSearchResults(() => {
+      if (searchTerm === "") return entries;
       else
-        return props.entries.filter((entry) =>
-          entry.body.toLowerCase().includes(event.target.value.toLowerCase())
+        return entries.filter((entry) =>
+          entry.body.toLowerCase().includes(searchTerm.toLowerCase())
         );
     });
-  };
+  }, [entries, searchTerm]);
+
 
   return (
-    <Box>
-      <Button
-        id="basic-button"
-        onClick={toggleShowSearchField}
-        endIcon={<SearchIcon />}
-      >
-        Search
-      </Button>
-      {showSearchField && (
-        <TextField
-          id="search-box"
-          variant={"standard"}
-          onChange={(event) => handleSearchInput(event)}
-        />
-      )}
-    </Box>
+    <TextField
+      id="search-box"
+      variant={"standard"}
+      label={"Search"}
+      onChange={(event) => setSearchTerm(() => event.target.value)}
+    />
   );
 };
 

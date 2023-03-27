@@ -18,7 +18,7 @@ import Box from "@mui/material/Box";
 
 const SideBar = (props) => {
   const [searchTerm, setSearchTerm] = React.useState("");
-  const [searchResults, setSearchResults] = React.useState(() => props.entries);
+  const [searchResults, setSearchResults] = React.useState(props.entries);
 
   return (
     <Drawer
@@ -46,14 +46,15 @@ const SideBar = (props) => {
       <Button aria-label="all-journals" variant="text" href="/">
         All Journals
       </Button>
-      <Box display={"flex"} flexDirection={"row"}>
+      <Divider />
+      <Box display={"flex"} flexDirection={"row"} alignItems={"flex-end"}>
+        <SortEntries setEntries={props.setEntries} />
         <SearchField
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           entries={props.entries}
           setSearchResults={setSearchResults}
         />
-        <SortEntries setEntries={props.setEntries} />
       </Box>
 
       <Divider />
@@ -62,6 +63,7 @@ const SideBar = (props) => {
           <ListItem
             key={entry.title || index}
             disablePadding
+            dense
             secondaryAction={
               entry.id === props.currentEntry.id && (
                 <IconButton
