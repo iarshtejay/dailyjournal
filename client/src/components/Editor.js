@@ -1,14 +1,17 @@
-import Textarea from "@mui/joy/Textarea";
+import { TextField } from "@mui/material";
 
 const Editor = (props) => {
   return (
-    <Textarea
+    <TextField
+      id="journal-content"
       color="primary"
-      placeholder="Type anything…"
+      placeholder="Let it flow"
       minRows={10}
       onChange={(event) => props.updateEntry(event.target.value)}
       value={props.currentEntry?.body || ""}
       autoFocus={true}
+      multiline
+      fullWidth
     />
   );
 };

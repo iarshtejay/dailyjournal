@@ -32,7 +32,9 @@ const theme = createTheme(themeOptions);
 const App = () => {
   return (
     <React.StrictMode>
+      <ThemeProvider theme={theme}>
         <RouterProvider router={router} />
+      </ThemeProvider>
     </React.StrictMode>
   );
 };
