@@ -4,7 +4,7 @@ const AnimatedWelcomeMessage = () => {
   return (
     <TypeAnimation
       sequence={[
-        "Welcome To Journally ",
+        "Welcome To Journo ",
         1000, // Waits 1s
         "We are thrilled to have you here 😄",
         1000, // Waits 2s // Waits 2s

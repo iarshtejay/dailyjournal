@@ -78,7 +78,7 @@ const AllJournals = () => {
     >
       <Typography variant="h1">📝</Typography>
       <Typography variant="h1" sx={{ fontWeight: "bold" }}>
-        Journally
+        Journo
       </Typography>
       <AnimatedWelcomeMessage />
       <NewJournalDialog createNewJournal={createNewJournal} />

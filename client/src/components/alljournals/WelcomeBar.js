@@ -13,7 +13,7 @@ const WelcomeBar = (props) => {
       <Paper elevation={0} width="50%">
         <Typography>
           {
-            "Welcome to Journally! We are thrilled to have you here and excited for you to embark on your personal journaling journey with us. Start by creating a new journal or continue a previous one."
+            "Welcome to Journo! We are thrilled to have you here and excited for you to embark on your personal journaling journey with us. Start by creating a new journal or continue a previous one."
           }
         </Typography>
       </Paper>
