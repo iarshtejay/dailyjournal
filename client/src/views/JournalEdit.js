@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import PromptGenerator from "../components/journaledit/PromptGenerator";
+import Footer from "../components/Footer";
 
 const drawerWidth = 250;
 

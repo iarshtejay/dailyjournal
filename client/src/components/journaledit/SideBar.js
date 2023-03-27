@@ -15,6 +15,7 @@ import moment from "moment";
 import SortEntries from "./SortEntries";
 import SearchField from "./SearchField";
 import Box from "@mui/material/Box";
+import Footer from "../Footer";
 
 const SideBar = (props) => {
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -91,6 +92,7 @@ const SideBar = (props) => {
           </ListItem>
         ))}
       </List>
+      <Footer />
     </Drawer>
   );
 };

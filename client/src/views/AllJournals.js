@@ -9,6 +9,7 @@ import AnimatedWelcomeMessage from "../components/alljournals/AnimatedWelcomeMes
 import NewJournalDialog from "../components/alljournals/NewJournalDialog";
 import { Typography } from "@mui/material";
 import background from "../bg.jpg";
+import Footer from "../components/Footer";
 
 const AllJournals = () => {
   /* Lazy loading of a state:
@@ -66,6 +67,7 @@ const AllJournals = () => {
           <NestedList journals={journals} deleteJournal={deleteJournal} />
         </Box>
       </Box>
+      <Footer />
     </Box>
   ) : (
     <Box
