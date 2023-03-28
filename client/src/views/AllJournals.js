@@ -50,6 +50,7 @@ const AllJournals = () => {
       if (journalId === currentJournalId) {
         setCurrentJournalId((journalId) => afterDeletion[0] || "");
       }
+      localStorage.removeItem(journalId)
       return afterDeletion;
     });
   };
