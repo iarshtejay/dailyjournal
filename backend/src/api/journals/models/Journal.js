@@ -5,7 +5,8 @@
 const mongoose = require("mongoose");
 
 const journal = mongoose.Schema({
-  name: String,
+  id: String,
+  title: String,
   emoji: String,
   owner: {
     type: mongoose.Schema.ObjectId,

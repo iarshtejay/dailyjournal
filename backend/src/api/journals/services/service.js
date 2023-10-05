@@ -6,7 +6,7 @@ const { journalNames } = require("../models/Journal");
 const Journal = require("../models/Journal");
 
 const getJournal = (journalId) => {
-  return Journal.findById(journalId);
+  return Journal.findOne({id:journalId});
 };
 
 const getAllJournals = () => {
@@ -19,12 +19,12 @@ const createNewJournal = async (journal) => {
 };
 
 const deleteJournal = (journalId) => {
-  return Journal.deleteOne({ _id: journalId });
+  return Journal.deleteOne({ id: journalId });
 };
 
 const updateJournal = (journalId, journal) => {
   console.log("Journalservice updateJournal --> ", journal, journalId);
-  return Journal.updateOne({ _id: journalId }, journal);
+  return Journal.updateOne({ id: journalId }, journal);
 };
 
 module.exports = {

@@ -7,9 +7,10 @@ import NestedList from "../components/alljournals/NestedList";
 import WelcomeBar from "../components/alljournals/WelcomeBar";
 import AnimatedWelcomeMessage from "../components/alljournals/AnimatedWelcomeMessage";
 import NewJournalDialog from "../components/alljournals/NewJournalDialog";
-import { Typography } from "@mui/material";
+import { Skeleton, Typography } from "@mui/material";
 import background from "../bg.jpg";
 import Footer from "../components/Footer";
+import journalsApi from "../services/journals-rest";
 
 const AllJournals = () => {
   /* Lazy loading of a state:
@@ -17,27 +18,54 @@ const AllJournals = () => {
    * This will ensure that the code gets executed only once even when React re-renders
    * */
 
-  const [journals, setJournals] = React.useState(
-    () => JSON.parse(localStorage.getItem("journals")) || []
-  );
+  const [journals, setJournals] = React.useState([]);
   const [currentJournalId, setCurrentJournalId] = React.useState(
     (journals[0] && journals[0].id) || ""
   );
+  const [journalsLoading, setJournalsLoading] = React.useState(true);
 
   React.useEffect(() => {
     localStorage.setItem("journals", JSON.stringify(journals));
-  }, [journals]);
+
+    journalsApi
+      .getAllJournals()
+      .then((res) => {
+        if (res?.data?.success) {
+          setJournals(res.data.journals);
+          console.log(res);
+        } else {
+          //Set notification
+          console.log("cannot get journals --> ", res.data.message);
+        }
+        setJournalsLoading(false);
+      })
+      .catch((err) => {
+        setJournalsLoading(false);
+        console.log(err);
+      });
+  }, []);
 
   const createNewJournal = (journalTitle, journalIcon) => {
     const newJournal = {
       id: nanoid(),
       title: journalTitle || "",
-      icon: journalIcon?.emoji || "✍🏽",
+      emoji: journalIcon?.emoji || "✍🏽",
       dateModified: new Date().toISOString(),
       dateCreated: new Date().toISOString(),
     };
     setJournals((prevJournals) => [newJournal, ...prevJournals]);
     setCurrentJournalId(newJournal.id);
+
+    journalsApi
+      .createJournal(newJournal)
+      .then((res) => {
+        //Send notification
+        console.log(res);
+      })
+      .catch((err) => {
+        //Send notification
+        console.log(err);
+      });
   };
 
   const deleteJournal = (event, journalId) => {
@@ -50,12 +78,43 @@ const AllJournals = () => {
       if (journalId === currentJournalId) {
         setCurrentJournalId((journalId) => afterDeletion[0] || "");
       }
-      localStorage.removeItem(journalId)
+      localStorage.removeItem(journalId);
       return afterDeletion;
     });
+
+    journalsApi
+      .deleteJournal(journalId)
+      .then((res) => {
+        //Send notification
+        console.log(res);
+      })
+      .catch((err) => {
+        //Send notification
+        console.log(err);
+      });
   };
 
-  return journals && journals.length > 0 ? (
+  if (journals && journals.length === 0 && !journalsLoading) {
+    return (
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        justifyContent="center"
+        alignItems={"center"}
+        sx={{ backgroundImage: `url(${background})`, objectFit: "contain" }}
+        height="100vh"
+      >
+        <Typography variant="h1">📝</Typography>
+        <Typography variant="h1" sx={{ fontWeight: "bold" }}>
+          Journo
+        </Typography>
+        <AnimatedWelcomeMessage />
+        <NewJournalDialog createNewJournal={createNewJournal} />
+      </Box>
+    );
+  }
+
+  return (
     <Box>
       <TitleBar />
       <Box flexDirection={"column"} sx={{ display: "flex", marginTop: "4em" }}>
@@ -65,26 +124,33 @@ const AllJournals = () => {
           sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
         >
           <WelcomeBar createNewJournal={createNewJournal} />
-          <NestedList journals={journals} deleteJournal={deleteJournal} />
+          {journalsLoading ? (
+            <>
+              <Skeleton
+                variant="rectangular"
+                maxWidth
+                height={80}
+                sx={{ marginBottom: "1em" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                maxWidth
+                height={80}
+                sx={{ marginBottom: "1em" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                maxWidth
+                height={80}
+                sx={{ marginBottom: "1em" }}
+              />
+            </>
+          ) : (
+            <NestedList journals={journals} deleteJournal={deleteJournal} />
+          )}
         </Box>
       </Box>
       <Footer />
-    </Box>
-  ) : (
-    <Box
-      display={"flex"}
-      flexDirection={"column"}
-      justifyContent="center"
-      alignItems={"center"}
-      sx={{ backgroundImage: `url(${background})`, objectFit: "contain" }}
-      height="100vh"
-    >
-      <Typography variant="h1">📝</Typography>
-      <Typography variant="h1" sx={{ fontWeight: "bold" }}>
-        Journo
-      </Typography>
-      <AnimatedWelcomeMessage />
-      <NewJournalDialog createNewJournal={createNewJournal} />
     </Box>
   );
 };

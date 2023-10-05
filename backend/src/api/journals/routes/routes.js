@@ -43,7 +43,7 @@ router.get("/", (req, res) => {
  * @params request, response
  * @return journal
  */
-router.get("/journal/:journalId", (req, res) => {
+router.get("/:journalId", (req, res) => {
   JournalService.getJournal(req.params.journalId)
     .then((journal) => {
       if (journal) {
@@ -73,7 +73,7 @@ router.get("/journal/:journalId", (req, res) => {
  * @params request, response
  * @return result
  */
-router.delete("/journal/:journalId", (req, res) => {
+router.delete("/:journalId", (req, res) => {
   JournalService.deleteJournal(req.params.journalId)
     .then((deleteResult) => {
       if (deleteResult.deletedCount) {
@@ -102,18 +102,19 @@ router.delete("/journal/:journalId", (req, res) => {
  * @params request, response
  * @return result
  */
-router.put("/journal/:journalId", (req, res) => {
+router.put("/:journalId", (req, res) => {
   const journalId = req.params.journalId;
-  const journal = req.body;
+  const journal = req.body.journal;
+  const newJournalEntry = { ...journal, dateModified: Date.now()}
   console.log("Inside update method -->", journalId);
-  JournalService.updateJournal(journalId, journal)
+  JournalService.updateJournal(journalId, newJournalEntry)
     .then((updateResult) => {
       console.log("Update Result --> ", updateResult);
       if (updateResult.acknowledged) {
         res.status(200).json({
           message: "Journal updated",
           success: true,
-          journal: journal,
+          journal: newJournalEntry,
         });
       } else {
         res.status(404).json({

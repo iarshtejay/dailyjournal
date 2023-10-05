@@ -1,7 +1,7 @@
 import { axiosClient } from "../lib/axiosClient";
 
-const createJournal = (newEntry) => {
-  return axiosClient.post("/api/journals", newEntry);
+const createJournal = (journal) => {
+  return axiosClient.post("/api/journals", { journal });
 };
 
 const getAllJournals = () => {
@@ -12,8 +12,8 @@ const getJournalById = (id) => {
   return axiosClient.get(`/api/journals/${id}`);
 };
 
-const updateJournal = (id, updatedEntry) => {
-  return axiosClient.put(`/api/journals/${id}`, updatedEntry);
+const updateJournal = (id, journal) => {
+  return axiosClient.put(`/api/journals/${id}`, { journal });
 };
 
 const deleteJournal = (id) => {

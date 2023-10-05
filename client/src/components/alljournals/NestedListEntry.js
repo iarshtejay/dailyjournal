@@ -20,7 +20,7 @@ const NestedListEntry = (props) => {
   return (
     <>
       <ListItemButton href={`/journals/${props.journal?.id || 123}`}>
-        <ListItemAvatar>{props.journal?.icon || "✍🏽"}</ListItemAvatar>
+        <ListItemAvatar>{props.journal?.emoji || "✍🏽"}</ListItemAvatar>
         <ListItemText
           primary={props.journal?.title || "Untitled Journal"}
           secondary={moment(
