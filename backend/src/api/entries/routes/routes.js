@@ -43,7 +43,7 @@ router.get("/", (req, res) => {
  * @params request, response
  * @return entry
  */
-router.get("/entry/:entryId", (req, res) => {
+router.get("/:entryId", (req, res) => {
   EntryService.getEntry(req.params.entryId)
     .then((entry) => {
       if (entry) {
@@ -73,7 +73,7 @@ router.get("/entry/:entryId", (req, res) => {
  * @params request, response
  * @return result
  */
-router.delete("/entry/:entryId", (req, res) => {
+router.delete("/:entryId", (req, res) => {
   EntryService.deleteEntry(req.params.entryId)
     .then((deleteResult) => {
       if (deleteResult.deletedCount) {
@@ -102,13 +102,11 @@ router.delete("/entry/:entryId", (req, res) => {
  * @params request, response
  * @return result
  */
-router.put("/entry/:entryId", (req, res) => {
+router.put("/:entryId", (req, res) => {
   const entryId = req.params.entryId;
-  const entry = req.body;
-  console.log("Inside update method -->", entryId);
+  const entry = req.body.entry;
   EntryService.updateEntry(entryId, entry)
     .then((updateResult) => {
-      console.log("Update Result --> ", updateResult);
       if (updateResult.acknowledged) {
         res.status(200).json({
           message: "Entry updated",
@@ -138,11 +136,11 @@ router.put("/entry/:entryId", (req, res) => {
  */
 router.post("/", (req, res) => {
   const entry = req.body.entry;
-  console.log("create entry-->", entry);
+
   if (entry) {
     EntryService.createNewEntry(entry)
       .then((newEntry) => {
-        res.status(200).json({
+        res.status(201).json({
           message: "Entry added",
           success: true,
           entry: { ...newEntry },

@@ -23,7 +23,6 @@ const deleteEntry = (entryId) => {
 };
 
 const updateEntry = (entryId, entry) => {
-  console.log("Entrieservice updateEntry --> ", entry, entryId);
   return Entry.updateOne({ _id: entryId }, entry);
 };
 
