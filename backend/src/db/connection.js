@@ -15,7 +15,7 @@ mongoose
 const dbConnnection = mongoose.connection;
 
 dbConnnection.on("error", (err) => {
-  console.log("Unable to connect to database");
+  console.log("Unable to connect to database", err);
 });
 
 module.exports = dbConnnection;
