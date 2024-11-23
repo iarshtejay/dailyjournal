@@ -143,7 +143,7 @@ router.post("/", (req, res) => {
   if (journal) {
     JournalService.createNewJournal(journal)
       .then((newJournal) => {
-        res.status(200).json({
+        res.status(201).json({
           message: "Journal added",
           success: true,
           journal: { ...newJournal },
