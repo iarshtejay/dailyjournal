@@ -157,7 +157,6 @@ describe("Journals CRUD API", () => {
       .put("/api/journals/64c88013212d4f5e8d9a1c4f")
       .send({ journal: updatedPutJournal });
 
-    console.log(resp.body);
     expect(resp.statusCode).toEqual(200);
     expect(resp.body).toHaveProperty("message", "Journal updated");
     expect(resp.body).toHaveProperty("success", true);
