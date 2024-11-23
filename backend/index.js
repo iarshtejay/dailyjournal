@@ -7,6 +7,8 @@ const dbConnnection = require("./src/db/connection");
 const cors = require('cors');
 const port = process.env.PORT || 3002
 
+console.log(process.env.DATABASE_URI)
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/images', express.static('./images'))
@@ -29,3 +31,5 @@ dbConnnection.on("connected", () => {
     console.log(`Server listening on ${port}!`);
   });
 });
+
+module.exports = app

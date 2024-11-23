@@ -105,11 +105,9 @@ router.delete("/:journalId", (req, res) => {
 router.put("/:journalId", (req, res) => {
   const journalId = req.params.journalId;
   const journal = req.body.journal;
-  const newJournalEntry = { ...journal, dateModified: Date.now()}
-  console.log("Inside update method -->", journalId);
+  const newJournalEntry = { ...journal, dateModified: Date.now() };
   JournalService.updateJournal(journalId, newJournalEntry)
     .then((updateResult) => {
-      console.log("Update Result --> ", updateResult);
       if (updateResult.acknowledged) {
         res.status(200).json({
           message: "Journal updated",
@@ -139,7 +137,6 @@ router.put("/:journalId", (req, res) => {
  */
 router.post("/", (req, res) => {
   const journal = req.body.journal;
-  console.log("create journal-->", journal);
   if (journal) {
     JournalService.createNewJournal(journal)
       .then((newJournal) => {
