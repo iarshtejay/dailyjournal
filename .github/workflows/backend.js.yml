@@ -29,9 +29,9 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
+        working-directory: ./backend
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: './backend/package-lock.json'
     - run: cd backend
     - run: npm ci
     - run: npm run test
