@@ -1,6 +1,7 @@
 name: Backend API Tests with Mockingoose
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main, master ]
     paths:
@@ -46,6 +47,6 @@ jobs:
       if: always()
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        directory: ./coverage
+        directory: ./backend/coverage
         fail_ci_if_error: false
         working-directory: ./backend

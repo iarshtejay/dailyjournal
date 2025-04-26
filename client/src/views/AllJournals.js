@@ -9,8 +9,9 @@ import AnimatedWelcomeMessage from "../components/alljournals/AnimatedWelcomeMes
 import NewJournalDialog from "../components/alljournals/NewJournalDialog";
 import { Skeleton, Typography } from "@mui/material";
 import background from "../bg.jpg";
-import Footer from "../components/Footer";
+import Footer from "../components/utils/Footer";
 import journalsApi from "../services/journals-rest";
+import { Alert } from "@mui/material";
 
 const AllJournals = () => {
   /* Lazy loading of a state:
@@ -23,6 +24,11 @@ const AllJournals = () => {
     (journals[0] && journals[0].id) || ""
   );
   const [journalsLoading, setJournalsLoading] = React.useState(true);
+  const [successAlert, setSuccessAlert] = React.useState(null);
+  const [failAlert, setFailAlert] = React.useState(null);
+  const generateAlert = (severity) => {
+    return <Alert severity={severity}>{successAlert || failAlert}</Alert>;
+  };
 
   React.useEffect(() => {
     localStorage.setItem("journals", JSON.stringify(journals));
@@ -60,10 +66,14 @@ const AllJournals = () => {
       .createJournal(newJournal)
       .then((res) => {
         //Send notification
+        setSuccessAlert("Journal created")
+        setFailAlert(null)
         console.log(res);
       })
       .catch((err) => {
         //Send notification
+        setSuccessAlert(null)
+        setFailAlert("Cannot create journal: "+ err.toString())
         console.log(err);
       });
   };
@@ -86,10 +96,14 @@ const AllJournals = () => {
       .deleteJournal(journalId)
       .then((res) => {
         //Send notification
+        setSuccessAlert("Journal deleted")
+        setFailAlert(null)
         console.log(res);
       })
       .catch((err) => {
         //Send notification
+        setSuccessAlert(null)
+        setFailAlert("Cannot delete journal: "+ err.toString())
         console.log(err);
       });
   };
@@ -146,7 +160,11 @@ const AllJournals = () => {
               />
             </>
           ) : (
-            <NestedList journals={journals} deleteJournal={deleteJournal} />
+            <>
+              {successAlert !== null ? generateAlert("success") : null}
+              {failAlert !== null ? generateAlert("error") : null}
+              <NestedList journals={journals} deleteJournal={deleteJournal} />
+            </>
           )}
         </Box>
       </Box>
