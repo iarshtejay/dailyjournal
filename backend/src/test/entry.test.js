@@ -6,6 +6,10 @@ const Entry = require("../api/entries/models/Entry");
 
 require("dotenv").config();
 
+beforeEach(() => {
+  mockingoose.resetAll();
+});
+
 const mockedEntries = [
   {
     _id: "648e0f4b5f9b34777a9d0c1a",

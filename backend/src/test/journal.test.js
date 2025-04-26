@@ -6,6 +6,10 @@ const Journal = require("../api/journals/models/Journal");
 
 require("dotenv").config();
 
+beforeEach(() => {
+  mockingoose.resetAll();
+});
+
 const mockedJournals = [
   //basic journal
   {
