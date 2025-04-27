@@ -9,7 +9,7 @@ import AnimatedWelcomeMessage from "../components/alljournals/AnimatedWelcomeMes
 import NewJournalDialog from "../components/alljournals/NewJournalDialog";
 import { Skeleton, Typography } from "@mui/material";
 import background from "../bg.jpg";
-import Footer from "../components/Footer";
+import Footer from "../components/utils/Footer";
 import journalsApi from "../services/journals-rest";
 
 const AllJournals = () => {
@@ -146,7 +146,7 @@ const AllJournals = () => {
               />
             </>
           ) : (
-            <NestedList journals={journals} deleteJournal={deleteJournal} />
+              <NestedList journals={journals} deleteJournal={deleteJournal} />
           )}
         </Box>
       </Box>
