@@ -15,7 +15,7 @@ import moment from "moment";
 import SortEntries from "./SortEntries";
 import SearchField from "./SearchField";
 import Box from "@mui/material/Box";
-import Footer from "../Footer";
+import Footer from "../utils/Footer";
 
 const SideBar = (props) => {
   const [searchTerm, setSearchTerm] = React.useState("");
